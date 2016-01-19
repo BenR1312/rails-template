@@ -1,0 +1,3 @@
+class SitesCsvParserPolicy < ApplicationPolicy
+  
+end

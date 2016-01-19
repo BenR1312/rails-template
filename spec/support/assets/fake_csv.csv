@@ -1,0 +1,4 @@
+name,rural,line_1,line_2,city,state,post_code
+"Site 1",false,"1 Street Name",,"Perth","WA",6025
+"Hell",true,"1 Satan Street","Unit 666","Melbourne","VIC",2006
+"","","","","","",""
