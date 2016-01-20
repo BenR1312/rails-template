@@ -54,6 +54,14 @@ EOF
         it "can't create a site with the same name" do
           expect { subject }.not_to change { Site.count }
         end
+
+        it "displays a message for the site that already exists", :focus do
+          already_imported_sites = csv_parser.already_imported_sites.first
+
+          expect(already_imported_sites).to be_present
+          expect(already_imported_sites).to be_kind_of(Site)
+          expect(already_imported_sites).to be_persisted
+        end
       end
     end
 

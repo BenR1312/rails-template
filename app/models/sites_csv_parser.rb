@@ -9,6 +9,7 @@ class SitesCsvParser
   attr_reader :csv_file
   attr_reader :invalid_sites
   attr_reader :valid_sites
+  attr_reader :already_imported_sites
 
   # csv_parser = SitesCsvParser.new(csv_file)
   # csv_parser.successful_sites       # [site_1, site2]
@@ -21,6 +22,8 @@ class SitesCsvParser
 
     @valid_sites = []
 
+    @already_imported_sites = []
+
     parse_csv_file
   end
 
@@ -31,7 +34,7 @@ protected
 
       row_hash = row.to_hash.with_indifferent_access
       if Site.exists?(name: row_hash[:name])
-        # Show message
+        @already_imported_sites << Site.find_by(name: row_hash[:name])
       else
         address = Address.new(row_hash.slice(:line_1, :line_2, :city, :post_code))
         address.state = get_state(row_hash[:state])
