@@ -1,0 +1,20 @@
+= link_to 'New site', new_admin_site_path
+= link_to 'CSV Upload', new_admin_sites_csv_parser_path
+%table
+  %tr
+    %th.span2 Name
+    %th.span2 Rural
+    %th.span2 Address 1
+    %th.span2 Address 2
+    %th.span2 Post Code
+    %th.span2 State
+  - @site.each do |site|
+    %tr
+      %td= site.name
+      %td= site.rural
+      %td= site.address.line_1
+      %td= site.address.line_2
+      %td= site.address.post_code
+      %td= site.address.state
+      %td= link_to 'Edit', edit_admin_site_path(site)
+      %td= link_to 'Delete', admin_site_path(site), method: :delete, data: { confirm: "Are you sure you want to delete #{site.name}?" }, class: "btn btn-small"

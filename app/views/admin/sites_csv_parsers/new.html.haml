@@ -1,9 +1,8 @@
 %h3 Import a CSV File
-= form_for :csv_parser, url: admin_sites_csv_parsers_path, html: {multipart: true} do |f|
-  = file_field_tag :file 
-  = submit_tag "Import CSV"
+= simple_form_for :csv_parser, url: admin_sites_csv_parsers_path, html: {multipart: true} do |f|
+  = f.input :file, as: :file
 
   %p
-    = f.submit
+    = f.submit "Import CSV"
     or
     = link_to 'Back', admin_sites_path
