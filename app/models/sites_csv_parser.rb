@@ -7,6 +7,8 @@ class SitesCsvParser
   # end
 
   attr_reader :csv_file
+  attr_reader :invalid_sites
+  attr_reader :valid_sites
 
   # csv_parser = SitesCsvParser.new(csv_file)
   # csv_parser.successful_sites       # [site_1, site2]
@@ -14,6 +16,11 @@ class SitesCsvParser
   # csv_parser.already_imported_sites # []
   def initialize(csv_file)
     @csv_file = csv_file
+
+    @invalid_sites = []
+
+    @valid_sites = []
+
     parse_csv_file
   end
 
@@ -28,9 +35,17 @@ protected
       else
         address = Address.new(row_hash.slice(:line_1, :line_2, :city, :post_code))
         address.state = get_state(row_hash[:state])
-        address.save!
+        address.save
 
-        Site.create!(row_hash.slice(:name, :rural).merge(address_id: address.id))
+        site = Site.create(row_hash.slice(:name, :rural).merge(address: address))
+
+        if site.invalid?
+          @invalid_sites << site
+        else
+          @valid_sites << site
+        end
+
+        # @invalid_sites << an_invalid_site
       end
 
       # USING accepts_nested_attributes_for

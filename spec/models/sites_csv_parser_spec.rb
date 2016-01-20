@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SitesCsvParser do
 
   describe '#initialize' do
-    subject { SitesCsvParser.new(csv_file) }
+    subject(:csv_parser) { SitesCsvParser.new(csv_file) }
 
     let(:csv_file) do
       Tempfile.new("csv").tap do |file|
@@ -38,9 +38,17 @@ EOF
           expect(site.address.state).to eq(victoria)
           expect(site.address.post_code).to eq("2006")
         end
+
+        it "adds valid sites to @valid_sites" do
+          valid_site = csv_parser.valid_sites.first
+
+          expect(valid_site).to be_present
+          expect(valid_site).to be_kind_of(Site)
+          expect(valid_site).to be_valid
+        end
       end
 
-      context "the site already exists", focus: true do
+      context "the site already exists" do
         let!(:site) { FactoryGirl.create(:site, name: "Hell") }
 
         it "can't create a site with the same name" do
@@ -48,5 +56,45 @@ EOF
         end
       end
     end
+
+    context "site data is invalid" do
+      let(:csv_content) do
+  <<-EOF
+name,rural,line_1,line_2,city,state,post_code
+"Hell",,"1 Satan Street","Unit 666","Melbourne","VIC",2006
+EOF
+      end
+      it "cant create a site with invalid site data" do
+        expect { subject }.not_to change { Site.count }
+      end
+      it "adds invalid site to @invalid_sites" do
+        invalid_site = csv_parser.invalid_sites.first
+
+        expect(invalid_site).to be_present
+        expect(invalid_site).to be_kind_of(Site)
+        expect(invalid_site).to be_invalid
+      end
+    end
+
+    context "address data is invalid" do
+      let(:csv_content) do
+  <<-EOF
+name,rural,line_1,line_2,city,state,post_code
+"Hell",true,,"Unit 666","Melbourne","VIC",2006
+EOF
+      end
+      it "cant create a site with invalid address data" do
+        expect { subject }.not_to change { Site.count }
+      end
+      it "adds invalid site to @invalid_sites" do
+        invalid_site = csv_parser.invalid_sites.first
+
+        expect(invalid_site).to be_present
+        expect(invalid_site).to be_kind_of(Site)
+        expect(invalid_site).to be_invalid
+      end
+    end  
+
   end
 end
+
