@@ -1,0 +1,18 @@
+%table  
+  %thead
+    %tr
+      %th Name
+      %th Rural
+      %th Address 1
+      %th Address 2
+      %th Post Code
+      %th State
+  %tbody
+    - sites.each do |site|
+      %tr
+        %td= site.name
+        %td= site.rural
+        %td= site.address.line_1
+        %td= site.address.line_2
+        %td= site.address.post_code
+        %td= site.address.state

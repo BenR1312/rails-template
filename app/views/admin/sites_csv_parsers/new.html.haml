@@ -1,8 +1,30 @@
-%h3 Import a CSV File
-= simple_form_for :csv_parser, url: admin_sites_csv_parsers_path, html: {multipart: true} do |f|
-  = f.input :file, as: :file
+- if @csv_parser.blank?
+  %h3 Import a CSV File
+  = simple_form_for :csv_parser, url: admin_sites_csv_parsers_path, html: {multipart: true} do |f|
+    = f.input :file, as: :file
 
-  %p
-    = f.submit "Import CSV"
-    or
-    = link_to 'Back', admin_sites_path
+    %p
+      = f.submit "Import CSV"
+      or
+      = link_to 'Back', admin_sites_path
+- else
+
+  - if @csv_parser.invalid_sites.any?
+    %h2 Invalid Sites
+    %p Some sites could not be imported for the following reasons:
+    %ul
+      - @csv_parser.invalid_sites.each do |site|
+        %li= site.errors.full_messages.join(" ")
+    %br
+
+  - if @csv_parser.valid_sites.any?
+    %h2 Sites that were successfully imported  
+    = render partial: "imported_sites_table", locals: {sites: (@csv_parser.valid_sites) }
+
+  - if @csv_parser.already_imported_sites.any?
+    %h2 Sites that were already imported
+    = render partial: "imported_sites_table", locals: {sites: (@csv_parser.already_imported_sites) }
+
+
+
+  
