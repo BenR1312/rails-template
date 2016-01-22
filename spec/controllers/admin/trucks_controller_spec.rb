@@ -60,4 +60,31 @@ RSpec.describe Admin::TrucksController do
       end
     end
   end
+
+  describe 'GET edit' do
+    subject { get :edit, id: target_truck.id }
+    let(:target_truck) { FactoryGirl.create(:truck) }
+
+    authenticated_as(:admin) do
+      it { should be_success}
+    end
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+  describe 'DELETE destroy' do
+    subject { delete :destroy, id: target_truck.id }
+    let(:target_truck) { FactoryGirl.create(:truck) }
+
+    authenticated_as(:admin) do
+      it "deletes the site" do
+        subject
+        expect(target_truck.delete)
+      end
+      it { should redirect_to(admin_trucks_path) }
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
 end
