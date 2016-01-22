@@ -1,0 +1,3 @@
+class TruckPolicy < ApplicationPolicy
+
+end

@@ -1,0 +1,21 @@
+%h3 Trucks
+
+= link_to 'New Truck', new_admin_truck_path
+
+
+%table
+  %tr
+    %th Registration
+    %th Truck Model
+    %th Driver
+    %th Sites
+    %th Scheduled Maintenance Date
+  - @truck.each do |truck|
+    %tr
+      %td= truck.registration
+      %td= truck.truck_model
+      %td= truck.driver
+      %td= truck.sites.map(&:name).to_sentence
+      %td= truck.scheduled_maintenance.strftime("%d/%m/%Y")
+    
+

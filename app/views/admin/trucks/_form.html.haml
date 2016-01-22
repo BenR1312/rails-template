@@ -1,0 +1,12 @@
+= simple_form_for [:admin, @truck] do |f|
+  = f.input :registration
+  = f.association :truck_model, collection: TruckModel.all
+  = f.association :driver, collection: User.member
+  = f.input :scheduled_maintenance, as: :date, html5: true
+  = f.simple_fields_for :sites do |ff|
+    = f.association :sites, as: :check_boxes  
+
+  %p
+    = f.submit
+    or
+    = link_to 'Back', admin_trucks_path

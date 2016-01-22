@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115064601) do
+ActiveRecord::Schema.define(version: 20160121055239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,38 @@ ActiveRecord::Schema.define(version: 20160115064601) do
     t.string   "sites_names"
   end
 
+  create_table "sites_trucks", id: false, force: :cascade do |t|
+    t.integer "site_id",  null: false
+    t.integer "truck_id", null: false
+  end
+
+  add_index "sites_trucks", ["site_id", "truck_id"], name: "index_sites_trucks_on_site_id_and_truck_id", using: :btree
+  add_index "sites_trucks", ["truck_id", "site_id"], name: "index_sites_trucks_on_truck_id_and_site_id", using: :btree
+
   create_table "states", force: :cascade do |t|
     t.string   "abbreviation", null: false
     t.string   "name",         null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "truck_models", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trucks", force: :cascade do |t|
+    t.string   "registration",          null: false
+    t.integer  "truck_model_id"
+    t.integer  "driver_id"
+    t.datetime "scheduled_maintenance"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "trucks", ["driver_id"], name: "index_trucks_on_driver_id", using: :btree
+  add_index "trucks", ["truck_model_id"], name: "index_trucks_on_truck_model_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -69,4 +95,5 @@ ActiveRecord::Schema.define(version: 20160115064601) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["site_id"], name: "index_users_on_site_id", using: :btree
 
+  add_foreign_key "trucks", "truck_models"
 end
