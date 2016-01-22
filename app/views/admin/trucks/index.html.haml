@@ -4,19 +4,23 @@
 
 
 %table
-  %tr
-    %th Registration
-    %th Truck Model
-    %th Driver
-    %th Sites
-    %th Scheduled Maintenance Date
-  - @truck.each do |truck|
+  %thead
     %tr
-      %td= truck.registration
-      %td= truck.truck_model
-      %td= truck.driver
-      %td= truck.sites.map(&:name).to_sentence
-      %td= truck.scheduled_maintenance.strftime("%d/%m/%Y")
-      %td= link_to 'Edit', edit_admin_truck_path(truck)
-      %td= link_to 'Delete', admin_truck_path(truck), method: :delete, data: { confirm: "Are you sure you want to delete #{truck.registration}?" }, class: "btn btn-small"
+      %th Registration
+      %th Truck Model
+      %th Driver
+      %th Sites
+      %th{colspan: 3} Scheduled Maintenance Date
+  %tbody
+    - @truck.each do |truck|
+      %tr
+        %td= truck.registration
+        %td= truck.truck_model
+        %td= truck.driver
+        %td= truck.sites.map(&:name).to_sentence
+        %td
+          - if truck.scheduled_maintenance.present?
+            = truck.scheduled_maintenance.strftime("%d/%m/%Y")
+        %td= link_to 'Edit', edit_admin_truck_path(truck)
+        %td= link_to 'Delete', admin_truck_path(truck), method: :delete, data: { confirm: "Are you sure you want to delete #{truck.registration}?" }, class: "btn btn-small"
 

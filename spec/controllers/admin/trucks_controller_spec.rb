@@ -27,7 +27,11 @@ RSpec.describe Admin::TrucksController do
 
   describe 'POST create' do
     subject(:create_truck) { post :create, truck: params }
-    let(:params) { {} }
+    # Put some irrelevant data in here to satisfy params.require(:truck)
+    let(:params) { {truck: {id: 666}} }
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
 
     authenticated_as(:admin) do
 
@@ -71,6 +75,60 @@ RSpec.describe Admin::TrucksController do
     it_behaves_like "action requiring authentication"
     it_behaves_like "action authorizes roles", [:admin]
   end
+
+  describe 'POST update' do
+    subject(:update_truck) { post :update, id: target_truck.id, truck: params }
+    # Put some irrelevant data in here to satisfy params.require(:truck)
+    let(:params) { {truck: {id: 666}} }
+    let(:target_truck) { FactoryGirl.create(:truck) }
+
+    authenticated_as(:admin) do
+
+      let!(:truck_model) { FactoryGirl.create(:truck_model) }
+      let!(:site) { FactoryGirl.create(:site) }
+      let!(:driver) { FactoryGirl.create(:user) }
+
+      context "with valid parameters" do
+        let(:params) do 
+          {
+            registration: "123334456",
+            truck_model_id: truck_model.id,
+            driver_id: driver.id,
+            site_ids: [site.id],
+            scheduled_maintenance: "2016/10/01"
+          }
+        end
+
+        it "creates a Truck object with the given attributes" do
+          update_truck
+
+          target_truck.reload
+        end
+
+        it { should redirect_to(admin_trucks_path) }
+      end
+
+      context "with invalid parameters" do
+        let(:params) do
+          {
+            registration: " ",
+            truck_model_id: truck_model.id,
+            driver_id: driver.id,
+            site_ids: [site.id],
+            scheduled_maintenance: " "
+          }
+        end
+
+        it "doesnt update the truck" do
+          update_truck
+          expect(target_truck.reload).not_to eq(truck: params)
+        end
+      end
+    end
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
 
   describe 'DELETE destroy' do
     subject { delete :destroy, id: target_truck.id }

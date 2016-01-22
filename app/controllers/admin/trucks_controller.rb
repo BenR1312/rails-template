@@ -32,10 +32,11 @@ class Admin::TrucksController < Admin::BaseController
 
   def update
     @truck = Truck.find(params[:id])
+    @truck.assign_attributes(truck_params)
+    authorize(@truck)
 
-    if @truck.update(truck_params)
+    if @truck.save
       respond_with(@truck, location: admin_trucks_path)
-      authorize(@truck)
     else
       render 'edit'
     end
