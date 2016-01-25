@@ -61,6 +61,13 @@ RSpec.describe Admin::TrucksController do
           expect(truck.sites).to include(site)
           expect(truck.scheduled_maintenance.to_i).to eq(DateTime.new(2016, 10, 1).to_i)
         end
+
+        it { should redirect_to admin_trucks_path }
+      end
+
+      context "with invalid parameters", :focus do
+        let(:params) { {registration: nil} }
+        specify { expect { subject }.not_to change(Truck, :count) }     
       end
     end
   end
@@ -128,7 +135,6 @@ RSpec.describe Admin::TrucksController do
     it_behaves_like "action requiring authentication"
     it_behaves_like "action authorizes roles", [:admin]
   end
-
 
   describe 'DELETE destroy' do
     subject { delete :destroy, id: target_truck.id }
