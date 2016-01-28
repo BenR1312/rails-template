@@ -55,7 +55,7 @@ EOF
           expect { subject }.not_to change { Site.count }
         end
 
-        it "displays a message for the site that already exists", :focus do
+        it "displays a message for the site that already exists" do
           already_imported_sites = csv_parser.already_imported_sites.first
 
           expect(already_imported_sites).to be_present

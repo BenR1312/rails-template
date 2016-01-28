@@ -25,6 +25,8 @@
     %h2 Sites that were already imported
     = render partial: "imported_sites_table", locals: {sites: (@csv_parser.already_imported_sites) }
 
+    %p
+      = link_to 'Back', admin_sites_path
 
 
   
