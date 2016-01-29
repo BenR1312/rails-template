@@ -54,6 +54,7 @@ RSpec.describe Admin::FleetsController do
           fleet = Fleet.order(:created_at).last
           expect(fleet).to be_present
           expect(fleet.fleet_name).to eq(params[:fleet_name])
+
           fleet_truck = fleet.fleet_trucks.first
           expect(fleet_truck.truck).to eq(truck)
           expect(fleet_truck.status).to eq("standard")
@@ -101,10 +102,17 @@ RSpec.describe Admin::FleetsController do
           }
         end
 
-        it "creates a fleet with given attributes" do
+        it "updates a fleet with given attributes" do
           update_fleet
-
           target_fleet.reload
+          fleet = Fleet.order(:created_at).last
+          expect(fleet).to be_present
+          expect(fleet.fleet_name).to eq("Flying Fleet")
+
+          fleet_truck = fleet.fleet_trucks.first
+          expect(fleet_truck.truck).to eq(truck)
+          expect(fleet_truck.status).to eq("standard")
+
         end
 
         it { should redirect_to(admin_fleets_path) }
@@ -125,7 +133,7 @@ RSpec.describe Admin::FleetsController do
 
         it "doesnt update the fleet" do
           update_fleet
-          expect(target_fleet.reload).not_to eq(fleet: params)
+          expect { subject }.not_to change { target_fleet.reload.attributes }
         end
       end
     end
@@ -133,14 +141,14 @@ RSpec.describe Admin::FleetsController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'DELETE destroy' do
+  describe 'DELETE destroy', :focus do
     subject { delete :destroy, id: target_fleet.id }
     let(:target_fleet) { FactoryGirl.create(:fleet) }
 
     authenticated_as(:admin) do
       it "deletes the site" do
         subject
-        expect(target_fleet.delete)
+        expect(target_fleet.delete).to be_deleted
       end
       it { should redirect_to(admin_fleets_path) }
     end
