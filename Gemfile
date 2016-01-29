@@ -36,7 +36,7 @@ group :development do
   gem 'quiet_assets'
   gem 'seed_helper'
   gem 'tfg_cap', git: 'git@github.com:thefrontiergroup/tfg-cap.git', require: nil
-  # gem 'web-console'
+
 end
 
 group :development, :test do

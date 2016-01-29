@@ -1,6 +1,5 @@
 class Admin::FleetsController < Admin::BaseController
 
-
   def index
     authorize(Fleet)
     @fleet = Fleet.all
@@ -17,11 +16,6 @@ class Admin::FleetsController < Admin::BaseController
     @fleet.save
 
     respond_with(@fleet, location: admin_fleets_path)
-  end
-
-  def show
-    authorize(@fleet)
-    @fleet = Fleet.find(params[:id])
   end
 
   def edit

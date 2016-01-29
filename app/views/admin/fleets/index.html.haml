@@ -4,11 +4,14 @@
 %table
   %tr
     %th Fleet Name
-    %th Trucks
+    %th{colspan: 2} Trucks
+
   - @fleet.each do |fleet|
     %tr
       %td= fleet.fleet_name
       %td= fleet.trucks.map{|truck| truck.registration }.join(", ")
-      / %td= fleet.fleet_trucks.map{|truck| truck.status }.join(", ")
-      %td= link_to 'Edit', edit_admin_fleet_path(fleet)
-      %td= link_to 'Delete', admin_fleet_path(fleet), method: :delete, data: { confirm: "Are you sure you want to delete #{fleet.fleet_name}?" }, class: "btn btn-small"
+      %td.actions
+        - if policy(fleet).edit?
+          = link_to 'Edit', edit_admin_fleet_path(fleet), class: "btn btn-small"
+        - if policy(fleet).destroy?
+          = link_to "Delete", admin_fleet_path(fleet), method: :delete, data: { confirm: "Are you sure you want to delete #{fleet}?" }, class: "btn btn-small"
