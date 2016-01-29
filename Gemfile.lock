@@ -81,6 +81,9 @@ GEM
     capybara-screenshot (1.0.11)
       capybara (>= 1.0, < 3)
       launchy
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
+    cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -93,7 +96,6 @@ GEM
     colorize (0.7.7)
     concurrent-ruby (1.0.0)
     database_cleaner (1.5.1)
-    debug_inspector (0.0.2)
     devise (3.5.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -114,6 +116,7 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffaker (2.1.0)
+    ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -154,6 +157,7 @@ GEM
     minitest (5.8.3)
     momentjs-rails (2.10.6)
       railties (>= 3.1)
+    multi_json (1.11.2)
     neat (1.7.2)
       bourbon (>= 4.0)
       sass (>= 3.3)
@@ -229,6 +233,7 @@ GEM
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
+    rubyzip (1.1.7)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
     sass (3.4.20)
@@ -241,6 +246,11 @@ GEM
     seed_helper (1.7.0)
       colorize (~> 0.7.5)
       rake (>= 10.0.0)
+    selenium-webdriver (2.50.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     sexp_processor (4.6.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
@@ -274,10 +284,7 @@ GEM
     version_sorter (2.0.0)
     warden (1.2.4)
       rack (>= 1.0)
-    web-console (3.0.0)
-      activemodel (>= 4.2)
-      debug_inspector
-      railties (>= 4.2)
+    websocket (1.2.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -290,6 +297,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+  cocoon
   coffee-rails
   database_cleaner
   devise
@@ -316,6 +324,7 @@ DEPENDENCIES
   rspec_junit_formatter
   sass-rails
   seed_helper
+  selenium-webdriver
   shoulda-matchers (~> 2.8.0)
   simple_form
   simplecov
@@ -323,7 +332,6 @@ DEPENDENCIES
   tfg_cap!
   uglifier
   uri_query_merger
-  web-console
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

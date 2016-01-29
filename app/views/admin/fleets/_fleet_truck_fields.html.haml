@@ -1,0 +1,6 @@
+.nested-fields
+  = f.association :truck, collection: Truck.all.order(created_at: :asc).map{|truck| [truck.registration, truck.id]}, prompt: 'Choose an existing Truck'
+  = f.input :status, collection: [["Standard", "standard"], ["Auxiliary", "auxiliary"]], checked: ["Standard", "standard"], as: :radio_buttons
+  
+  %p
+    = link_to_remove_association "remove truck", f

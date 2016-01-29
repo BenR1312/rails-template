@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    errors:
+      models:
+        fleet_truck:
+          attributes:
+            truck_id:
+              taken: "Truck has already been assigned to this fleet"
   date:
     formats:
       concise: "%d/%m/%Y"    # 19/07/2015

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121055239) do
+ActiveRecord::Schema.define(version: 20160129040838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(version: 20160121055239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "fleet_trucks", force: :cascade do |t|
+    t.integer  "fleet_id"
+    t.integer  "truck_id"
+    t.string   "status",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "fleet_trucks", ["fleet_id"], name: "index_fleet_trucks_on_fleet_id", using: :btree
+  add_index "fleet_trucks", ["truck_id"], name: "index_fleet_trucks_on_truck_id", using: :btree
+
+  create_table "fleets", force: :cascade do |t|
+    t.string   "fleet_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+  end
+
+  add_index "fleets", ["deleted_at"], name: "index_fleets_on_deleted_at", using: :btree
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
