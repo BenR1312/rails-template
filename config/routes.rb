@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :sites
     resources :sites_csv_parsers, only: [:new, :create]
     resources :trucks
+    resources :fleets
   end
 
   namespace :member do

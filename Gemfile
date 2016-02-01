@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'bourbon'
 gem 'neat'
+gem 'cocoon'
 
 # Misc
 gem 'responders'
@@ -35,7 +36,7 @@ group :development do
   gem 'quiet_assets'
   gem 'seed_helper'
   gem 'tfg_cap', git: 'git@github.com:thefrontiergroup/tfg-cap.git', require: nil
-  gem 'web-console'
+
 end
 
 group :development, :test do
@@ -53,6 +54,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'email_spec'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 2.8.0'
 end
 

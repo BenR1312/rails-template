@@ -1,0 +1,9 @@
+= simple_form_for [:admin, @fleet] do |f|
+  = f.input :fleet_name
+  
+  #trucks
+    = f.simple_fields_for :fleet_trucks do |fleet_truck|
+      = render 'fleet_truck_fields', f: fleet_truck
+    = link_to_add_association 'add a truck', f, :fleet_trucks
+  
+  = f.submit

@@ -1,5 +1,8 @@
 class Truck < ActiveRecord::Base
   
+  has_many :fleet_trucks
+  has_many :fleets, through: :fleet_trucks
+
   belongs_to :truck_model
   belongs_to :driver, class_name: User
 

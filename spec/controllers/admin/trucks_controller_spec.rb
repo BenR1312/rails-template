@@ -65,7 +65,7 @@ RSpec.describe Admin::TrucksController do
         it { should redirect_to admin_trucks_path }
       end
 
-      context "with invalid parameters", :focus do
+      context "with invalid parameters" do
         let(:params) { {registration: nil} }
         specify { expect { subject }.not_to change(Truck, :count) }     
       end

@@ -1,0 +1,3 @@
+class FleetPolicy < ApplicationPolicy
+
+end

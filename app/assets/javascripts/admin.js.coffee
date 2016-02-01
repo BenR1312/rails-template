@@ -5,3 +5,4 @@
 #= require pikaday.jquery
 #= require jquery.timepicker.js
 #= require_tree ./admin
+#= require cocoon
