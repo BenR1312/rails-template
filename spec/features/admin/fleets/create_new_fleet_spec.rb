@@ -18,7 +18,6 @@ feature 'Admin can create and assign trucks to a fleet', :js do
       fill_in("Fleet name", with: "")
       click_button("Create")
 
-      # TODO: Assert flash message is present
       expect(current_path).to eq(admin_fleets_path)
       within(".fleet_fleet_name") { expect(page).to have_content ("can't be blank") }
     end
@@ -45,6 +44,4 @@ feature 'Admin can create and assign trucks to a fleet', :js do
       expect(fleet_truck.status).to eq("auxiliary")
     end
   end
-
-  # TODO: Can remove existing FleetTruck - move this to update spec
 end
