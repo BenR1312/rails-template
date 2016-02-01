@@ -15,8 +15,8 @@ feature 'Admin can delete an existing Fleet' do
         click_link("Delete")
       end
       
-      expect(target_fleet.reload).to be_deleted
       expect(page).to have_flash(:notice, "Fleet was successfully deleted.")
+      expect(target_fleet.reload).to be_deleted
     end
   end
 end

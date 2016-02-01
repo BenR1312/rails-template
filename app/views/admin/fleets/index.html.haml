@@ -9,7 +9,7 @@
   - @fleet.each do |fleet|
     %tr
       %td= fleet.fleet_name
-      %td= fleet.trucks.map{|truck| truck.registration }.join(", ")
+      %td= fleet.trucks.map(&:registration).to_sentence
       %td.actions
         - if policy(fleet).edit?
           = link_to 'Edit', edit_admin_fleet_path(fleet), class: "btn btn-small"

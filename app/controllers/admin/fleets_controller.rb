@@ -14,14 +14,13 @@ class Admin::FleetsController < Admin::BaseController
     @fleet = Fleet.new(fleet_params)
     authorize(@fleet)
     @fleet.save
-
+      
     respond_with(@fleet, location: admin_fleets_path)
   end
 
   def edit
     @fleet = Fleet.find(params[:id])
     authorize(@fleet)
-    @fleet.save
     respond_with(@site, location: admin_fleets_path)
   end
 
@@ -30,11 +29,8 @@ class Admin::FleetsController < Admin::BaseController
     @fleet.assign_attributes(fleet_params)
     authorize(@fleet)
 
-    if @fleet.save
-      respond_with(@fleet, location: admin_fleets_path)
-    else
-      render 'edit'
-    end
+    @fleet.save
+    respond_with(@fleet, location: admin_fleets_path)
   end
 
   def destroy
@@ -49,5 +45,4 @@ private
   def fleet_params
     params.require(:fleet).permit(:fleet_name, fleet_trucks_attributes: [:id, :truck_id, :status, :_destroy])
   end
-
 end

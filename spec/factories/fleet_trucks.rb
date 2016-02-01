@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :fleet_truck do
-    status "MyString"
+    status { ["standard", "auxiliary"].sample }
     association :fleet
     association :truck
   end

@@ -12,5 +12,4 @@ class Truck < ActiveRecord::Base
   validates :truck_model, presence: true
   validates :driver, presence: true
 
-
 end

@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :fleet do
-    fleet_name "MyString"
+    fleet_name { FFaker::Name.name }
 
   end
-
 end
