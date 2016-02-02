@@ -6,7 +6,7 @@ RSpec.describe FleetTruck, type: :model do
     it { should validate_presence_of(:status) }
   end
 
-  describe "@truck_id", :focus do
+  describe "@truck_id" do
     it "prevents a Truck from being assigned to the same Fleet twice" do
       fleet = FactoryGirl.create(:fleet)
       truck = FactoryGirl.create(:truck)
