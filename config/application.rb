@@ -18,5 +18,7 @@ module TfgTemplate
 
     config.should_seed_application_data = false
     config.should_show_easy_login = false
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

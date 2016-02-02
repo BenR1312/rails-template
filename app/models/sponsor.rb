@@ -1,5 +1,5 @@
 class Sponsor < ActiveRecord::Base
-  mount_uploader :sponsor_logo, SponsorLogoUploader
+  mount_uploader :logo, LogoUploader
   belongs_to :company
 
   validates :name, presence: true
