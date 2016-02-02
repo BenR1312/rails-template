@@ -1,0 +1,7 @@
+.nested-fields
+  = f.input :name, label: 'Sponsor Name'
+  = f.input :description
+  = f.input :logo, label: "Sponsor Logo"
+
+  %p
+    = link_to_remove_association "remove sponsor", f

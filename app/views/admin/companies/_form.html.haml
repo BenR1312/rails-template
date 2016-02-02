@@ -1,0 +1,13 @@
+= simple_form_for [:admin, @company] do |f|
+  = f.input :name, label: "Company Name"
+  = f.input :country
+  = f.input :slogan
+  = f.input :banner_image, label: "Company Banner"
+  = f.input :logo, label: "Company Logo"
+  
+  #sponsors
+    = f.simple_fields_for :sponsors do |sponsor|
+      = render 'sponsor_fields', f: sponsor
+    = link_to_add_association 'add sponsor', f, :sponsors
+  
+  = f.submit

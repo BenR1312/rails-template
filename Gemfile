@@ -6,6 +6,9 @@ gem 'rails'
 gem 'paranoia'
 gem 'pg'
 gem 'rails_sort', github: "thefrontiergroup/rails_sort"
+gem 'carrierwave'
+gem 'countries'
+gem 'country_select'
 
 # Authentication & Authorization
 gem 'devise'
