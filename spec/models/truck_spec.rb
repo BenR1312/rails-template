@@ -13,6 +13,4 @@ RSpec.describe Truck, type: :model do
   describe "@driver" do
     it { should validate_presence_of(:driver) }
   end
-  
-
 end

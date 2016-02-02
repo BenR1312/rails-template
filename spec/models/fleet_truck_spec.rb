@@ -20,5 +20,4 @@ RSpec.describe FleetTruck, type: :model do
       expect(duplicate.errors[:truck_id].count).to eq(1)
     end
   end
-
 end
