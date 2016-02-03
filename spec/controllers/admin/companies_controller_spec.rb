@@ -90,7 +90,6 @@ RSpec.describe Admin::CompaniesController do
     let(:target_company) { FactoryGirl.create(:company) }
 
     authenticated_as(:admin) do
-      # let!(:company) { FactoryGirl.create(:company) }
 
       context "with valid parameters" do
         let(:params) do

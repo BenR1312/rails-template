@@ -1,0 +1,11 @@
+%h3= @company.name
+= @company.country
+= @company.slogan
+= @company.banner_image
+= @company.logo
+
+  - @company.sponsors.each do |sponsor|
+  %div
+    %h3= sponsor.name
+    = sponsor.logo
+    = sponsor.description

@@ -18,10 +18,10 @@ class Admin::CompaniesController < Admin::BaseController
     respond_with(@company, location: admin_companies_path)
   end
 
-  def show
-    authorize(@company)
-    @company = Company.find(params[:id])
-  end
+  # def show
+  #   @company = Company.find(params[:id])
+  #   authorize(@company)
+  # end
 
   def edit
     @company = Company.find(params[:id])

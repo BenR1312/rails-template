@@ -1,4 +1,3 @@
-.splash
-  %h1 Home
-  = image_tag 'create-glyph-logo.svg', size: '336x336'
-  %span Create
+- @companies.each do |company|
+  %ul= company.name
+  = link_to "Profile", company

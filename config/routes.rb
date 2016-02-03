@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
 
   resources :home, only: :index
+  resources :companies
   root to: "home#index"
 
   namespace :admin do
