@@ -1,4 +1,4 @@
-= simple_form_for [:admin, @company] do |f|
+= simple_form_for [:admin, @company], html: {multipart: true} do |f|
   = f.input :name, label: "Company Name"
   = f.input :country
   = f.input :slogan

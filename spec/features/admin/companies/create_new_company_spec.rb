@@ -30,10 +30,13 @@ feature 'Admin can create and assign sponsors to a company', :js do
       fill_in 'Company Name', with: "Company Name"
       select(ISO3166::Country.new(company.country).name, from: 'Country')
       fill_in 'Slogan', with: "Company Slogan"
+      attach_file("Company Banner", sample_upload_file)
+      attach_file("Company Logo", sample_upload_file)
       click_link('add sponsor')
       within(".nested-fields") do
         fill_in 'Sponsor Name', with: "Sponsor Name"
         fill_in 'Description', with: "Sponsor Description"
+        attach_file("Sponsor Logo", sample_upload_file)
       end
       click_button('Create')
 
@@ -43,12 +46,14 @@ feature 'Admin can create and assign sponsors to a company', :js do
       expect(latest_company.name).to eq("Company Name")
       expect(latest_company.country).to eq(company.country)
       expect(latest_company.slogan).to eq("Company Slogan")
+      expect(latest_company.banner_image).to be_present
+      expect(latest_company.logo).to be_present
 
       latest_company = latest_company.sponsors.first
       expect(latest_company).to be_present
       expect(latest_company.name).to eq("Sponsor Name")
-      expect(latest_company.description).to eq("Sponsor Description") 
-
+      expect(latest_company.description).to eq("Sponsor Description")
+      expect(latest_company.logo).to be_present
     end
   end
 end

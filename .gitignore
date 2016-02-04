@@ -21,3 +21,4 @@ config/secrets.yml
 
 # Ignore uploaded files
 public/uploads/**/*
+public/test_assets/**/*

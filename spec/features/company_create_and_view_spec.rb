@@ -14,10 +14,13 @@ feature 'User who is not authenticated can view Company index and profile' do
     expect(latest_company.name).to eq(company.name)
     expect(latest_company.country).to eq(company.country)
     expect(latest_company.slogan).to eq(company.slogan)
+    expect(latest_company.banner_image).to be_present
+    expect(latest_company.logo).to be_present
 
     latest_sponsor = latest_company.sponsors.first
     expect(latest_sponsor).to be_present
     expect(latest_sponsor.name).to eq(sponsor.name)
-    expect(latest_sponsor.description).to eq(sponsor.description) 
+    expect(latest_sponsor.description).to eq(sponsor.description)
+    expect(latest_sponsor.logo).to be_present
   end
 end

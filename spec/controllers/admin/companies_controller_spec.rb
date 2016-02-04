@@ -25,7 +25,7 @@ RSpec.describe Admin::CompaniesController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'POST create' do
+  describe 'POST create', :focus do
     subject(:create_company) { post :create, company: params }
     let(:params) { {company: {id: 300}} }
 
@@ -40,10 +40,13 @@ RSpec.describe Admin::CompaniesController do
             name: "Name",
             country: "Australia",
             slogan: "Slogan",
+            banner_image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'company', 'banner_placeholder.png')),
+            logo: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'company', 'company_logo_placeholder.png')),
             sponsors_attributes: {
               "112233" => {
                 name: "Sponsor Name",
-                description: "Sponsor Description"
+                description: "Sponsor Description",
+                logo: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'company', 'sponsor_logo_placeholder.png')),
               }
             }
           }
@@ -54,13 +57,17 @@ RSpec.describe Admin::CompaniesController do
 
           company = Company.order(:created_at).last
           expect(company).to be_present
+          expect(company.banner_image).to be_present
+          expect(company.logo).to be_present
           expect(company.name).to eq(params[:name])
           expect(company.country).to eq(params[:country])
           expect(company.slogan).to eq(params[:slogan])
 
+
           sponsor = company.sponsors.first
           expect(sponsor.name).to eq("Sponsor Name")
           expect(sponsor.description).to eq("Sponsor Description")
+          expect(sponsor.logo).to be_present
         end
 
         it { should redirect_to admin_companies_path }
@@ -97,10 +104,13 @@ RSpec.describe Admin::CompaniesController do
             name: "Company Name",
             country: "Australia",
             slogan: "Company Slogan",
+            banner_image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'company', 'banner_placeholder.png')),
+            logo: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'company', 'company_logo_placeholder.png')),
             sponsors_attributes: {
               "112233" => {
                 name: "Sponsor Name",
-                description: "Sponsor Description"
+                description: "Sponsor Description",
+                logo: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'company', 'sponsor_logo_placeholder.png')),
               }
             }
           }

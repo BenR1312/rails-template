@@ -50,6 +50,7 @@ RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   config.include(AttributesComparisonSupport)
+  config.include(FileUploadSupport)
 
   # Controllers
   config.include Devise::TestHelpers, type: :controller

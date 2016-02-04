@@ -1,11 +1,18 @@
+%ul
+  - if @company.banner_image.present?
+    = image_tag(@company.banner_image.url)
 %h3= @company.name
+%ul
+  - if @company.logo.present?
+    = image_tag(@company.logo.url)
 = @company.country
 = @company.slogan
-= @company.banner_image
-= @company.logo
-
-  - @company.sponsors.each do |sponsor|
+%br
+%br
+- @company.sponsors.each do |sponsor|
   %div
     %h3= sponsor.name
-    = sponsor.logo
     = sponsor.description
+    %ul
+      - if sponsor.logo.present?
+        = image_tag(sponsor.logo.url)

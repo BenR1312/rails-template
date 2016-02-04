@@ -18,11 +18,6 @@ class Admin::CompaniesController < Admin::BaseController
     respond_with(@company, location: admin_companies_path)
   end
 
-  # def show
-  #   @company = Company.find(params[:id])
-  #   authorize(@company)
-  # end
-
   def edit
     @company = Company.find(params[:id])
     authorize(@company)
@@ -46,11 +41,10 @@ class Admin::CompaniesController < Admin::BaseController
     respond_with(@company, location: admin_companies_path)
   end
 
-
 private
 
   def company_params
-    params.require(:company).permit(:name, :country, :slogan, {banner_image: []}, {logo: []}, sponsors_attributes: [:id, :company_id, :name, {logo: []}, :description, :_destroy] )
+    params.require(:company).permit(:name, :country, :slogan, :banner_image, :logo, sponsors_attributes: [:id, :company_id, :name, :logo, :description, :_destroy] )
   end
 
 end
