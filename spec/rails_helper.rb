@@ -7,6 +7,8 @@ require 'simplecov'
 require 'simplecov-rcov'
 require 'capybara-screenshot/rspec'
 require 'database_cleaner'
+#custom config
+require 'carrier_wave_support'
 require 'database_cleaner_helper'
 
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter

@@ -18,3 +18,6 @@ coverage/*
 # Ignore config files
 config/database.yml
 config/secrets.yml
+
+# Ignore uploaded files
+public/uploads/**/*
