@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Leap_Year do
+describe LeapYear do
 
   describe "is it a leap year?" do
     subject { Leap_Year.new.is_leap_year(year) }
