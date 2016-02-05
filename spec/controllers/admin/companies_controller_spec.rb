@@ -63,7 +63,6 @@ RSpec.describe Admin::CompaniesController do
           expect(company.country).to eq(params[:country])
           expect(company.slogan).to eq(params[:slogan])
 
-
           sponsor = company.sponsors.first
           expect(sponsor.name).to eq("Sponsor Name")
           expect(sponsor.description).to eq("Sponsor Description")
