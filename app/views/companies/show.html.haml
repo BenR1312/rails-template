@@ -1,14 +1,14 @@
 %ul= image_tag(@company.banner_image.url)
-%h3= @company.name
+%h1= @company.name
 %ul= image_tag(@company.logo.url)
-= @company.country
-= @company.slogan
+- jordan_rules = ISO3166::Country.new(@company.country).name
+= "Based in #{jordan_rules}"
+%i= @company.slogan
 %br
 %br
+%h2 SPONSORS
 - @company.sponsors.each do |sponsor|
   %div
-    %h3= sponsor.name
-    = simple_format(sponsor.description)
-    = sponsor.description
-    = sponsor.description.html_safe
+    %h2= sponsor.name
     %ul= image_tag(sponsor.logo.url)
+    = simple_format(sponsor.description)

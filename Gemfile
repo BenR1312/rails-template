@@ -7,6 +7,8 @@ gem 'paranoia'
 gem 'pg'
 gem 'rails_sort', github: "thefrontiergroup/rails_sort"
 gem 'carrierwave'
+# 4.3.6 has been yanked
+gem 'mini_magick', '4.3.5'
 gem 'countries'
 gem 'country_select'
 

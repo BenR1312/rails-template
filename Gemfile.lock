@@ -166,6 +166,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.99)
+    mini_magick (4.3.5)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     momentjs-rails (2.10.6)
@@ -328,6 +329,7 @@ DEPENDENCIES
   jquery-timepicker-rails
   kaminari
   letter_opener
+  mini_magick (= 4.3.5)
   momentjs-rails
   neat
   normalize-rails
