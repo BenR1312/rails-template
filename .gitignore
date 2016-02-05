@@ -14,6 +14,7 @@
 # Ignore spec files
 results/rspec.xml
 coverage/*
+spec/support/company/*
 
 # Ignore config files
 config/database.yml
