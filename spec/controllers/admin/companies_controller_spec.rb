@@ -125,7 +125,6 @@ RSpec.describe Admin::CompaniesController do
           sponsor = target_company.sponsors.first
           expect(sponsor.name).to eq("Sponsor Name")
           expect(sponsor.description).to eq("Sponsor Description")
-
         end
 
         it { should redirect_to(admin_companies_path) }
@@ -165,6 +164,7 @@ RSpec.describe Admin::CompaniesController do
         subject
         expect(target_company.reload).to be_deleted
       end
+      
       it { should redirect_to(admin_companies_path) }
     end
     it_behaves_like "action requiring authentication"
