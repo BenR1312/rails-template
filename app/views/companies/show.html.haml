@@ -12,7 +12,9 @@
 - @company.sponsors.each do |sponsor|
   %div
     %h3= sponsor.name
+    = simple_format(sponsor.description)
     = sponsor.description
+    = sponsor.description.html_safe
     %ul
       - if sponsor.logo.present?
         = image_tag(sponsor.logo.url)
