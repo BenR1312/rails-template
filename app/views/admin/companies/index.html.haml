@@ -10,12 +10,8 @@
     %tr
       %td= company.name
       %td= ISO3166::Country.new(company.country).name
-      %td
-        - if company.banner_image.present?
-          = image_tag(company.banner_image.url)
-      %td
-        - if company.logo.present?
-          = image_tag(company.logo.url)
+      %td= image_tag(company.banner_image.url)
+      %td= image_tag(company.logo.url)
       %td.actions
         - if policy(company).edit?
           = link_to 'Edit', edit_admin_company_path(company), class: "btn btn-small"

@@ -1,10 +1,6 @@
-%ul
-  - if @company.banner_image.present?
-    = image_tag(@company.banner_image.url)
+%ul= image_tag(@company.banner_image.url)
 %h3= @company.name
-%ul
-  - if @company.logo.present?
-    = image_tag(@company.logo.url)
+%ul= image_tag(@company.logo.url)
 = @company.country
 = @company.slogan
 %br
@@ -15,6 +11,4 @@
     = simple_format(sponsor.description)
     = sponsor.description
     = sponsor.description.html_safe
-    %ul
-      - if sponsor.logo.present?
-        = image_tag(sponsor.logo.url)
+    %ul= image_tag(sponsor.logo.url)
