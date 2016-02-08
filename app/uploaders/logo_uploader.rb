@@ -7,7 +7,7 @@ class LogoUploader < BaseUploader
     process resize_to_fill: [50,50]
   end
 
-  def default_url(*args)
-    "default.png"
+  def default_url
+    "logo_placeholder.png"
   end
 end

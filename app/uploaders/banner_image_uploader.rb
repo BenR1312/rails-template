@@ -4,6 +4,6 @@ class BannerImageUploader < BaseUploader
   process resize_to_fit: [800, 100]
 
   def default_url
-    "default.png"
+    "banner_placeholder.png"
   end
 end
