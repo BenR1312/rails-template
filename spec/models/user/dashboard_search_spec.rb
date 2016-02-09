@@ -78,7 +78,7 @@ RSpec.describe User::DashboardSearch do
       it { should_not include(FactoryGirl.create(:user, site: rural_false)) }
     end
 
-    describe "scoping by updated_at", focus: true do
+    describe "scoping by updated_at" do
       let(:search_params) do
         {
           updated_from: format_as_date(updated_from, date_format),
