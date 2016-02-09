@@ -3,7 +3,7 @@ require 'rails_helper'
 describe LeapYear do
 
   describe "is it a leap year?" do
-    subject { Leap_Year.new.is_leap_year(year) }
+    subject { LeapYear.new.is_leap_year(year) }
 
     describe "is divisble by 4" do
       let(:year) { 1716 }
