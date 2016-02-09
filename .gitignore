@@ -23,3 +23,7 @@ config/secrets.yml
 # Ignore uploaded files
 public/uploads/**/*
 public/test_assets/**/*
+
+# Ignore redis binary dump (dump.rdb) files
+
+*.rdb

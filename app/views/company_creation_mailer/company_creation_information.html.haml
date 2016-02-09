@@ -1,0 +1,4 @@
+%h1 The Company "#{@company.name}" has been created.
+%p "#{@company.name}" has the following sponsors;
+- @company.sponsors.each do |sponsor|
+  %li= sponsor.name

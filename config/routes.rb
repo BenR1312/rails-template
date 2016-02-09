@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  require 'sidekiq/web'
   # Override registrations controller so we can manually set the role to 'Member'
   devise_for :users, controllers: {
     registrations: "devise_customisations/registrations",
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :home, only: :index
   resources :companies
   root to: "home#index"
+  mount Sidekiq::Web, at: "/sidekiq"
 
   namespace :admin do
     resources :dashboard, only: :index

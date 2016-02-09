@@ -11,6 +11,10 @@ gem 'carrierwave'
 gem 'mini_magick', '4.3.5'
 gem 'countries'
 gem 'country_select'
+gem 'sidekiq'
+gem 'redis-namespace'
+gem 'sinatra', require: false
+gem 'slim'
 
 # Authentication & Authorization
 gem 'devise'

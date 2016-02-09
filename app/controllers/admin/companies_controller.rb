@@ -13,7 +13,9 @@ class Admin::CompaniesController < Admin::BaseController
   def create
     @company = Company.new(company_params)
     authorize(@company)
-    @company.save
+    if @company.save
+      AdminCompanyCreationMailerJob.set(wait_until: 1.day.from_now).perform_later(@company.id)
+    end
 
     respond_with(@company, location: admin_companies_path)
   end
