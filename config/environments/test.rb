@@ -37,4 +37,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Set queue adapter into test mode
+  config.active_job.queue_adapter = :test
+
 end

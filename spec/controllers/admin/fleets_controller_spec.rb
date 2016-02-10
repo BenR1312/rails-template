@@ -68,7 +68,7 @@ RSpec.describe Admin::FleetsController do
         specify { expect { subject }.not_to change(Fleet, :count) }
       end
 
-      context "parameters create duplicate entriers for the same truck", :focus do
+      context "parameters create duplicate entriers for the same truck" do
         let(:params) do
           {
             fleet_name: "Flying Fleet",

@@ -25,7 +25,7 @@ RSpec.describe Admin::CompaniesController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'POST create', :focus do
+  describe 'POST create' do
     subject(:create_company) { post :create, company: params }
     let(:params) { {company: {id: 300}} }
 
@@ -67,6 +67,17 @@ RSpec.describe Admin::CompaniesController do
           expect(sponsor.name).to eq("Sponsor Name")
           expect(sponsor.description).to eq("Sponsor Description")
           expect(sponsor.logo).to be_present
+        end
+
+        #requires tests for sending email on creation
+        it 'calls AdminCompanyCreationMailerJob' do
+          worker = double
+          expect(AdminCompanyCreationMailerJob).to receive(:set).with(wait_until: 1.day.from_now.change(hour: 8)).and_return(worker)
+
+          job = double
+          expect(worker).to receive(:perform_later).and_return(job)
+
+          subject
         end
 
         it { should redirect_to admin_companies_path }
