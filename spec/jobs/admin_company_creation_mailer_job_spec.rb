@@ -15,15 +15,26 @@ RSpec.describe AdminCompanyCreationMailerJob, type: :job do
   end
 
   describe 'perform' do
-    it "sends company_creation_information from the mailer" do
-      stub_mailer = double
-      expect(CompanyCreationMailer).to receive(:company_creation_information).with(company).and_return(stub_mailer)
 
-      expect(stub_mailer).to receive(:deliver_later)
+    context "with an active Company" do
+      it "sends company_creation_information from the mailer" do
+        stub_mailer = double
 
-      subject
+        expect(CompanyCreationMailer).to receive(:company_creation_information).with(company).and_return(stub_mailer)
+
+        expect(stub_mailer).to receive(:deliver_later)
+
+        subject
+      end
+    end
+
+    context "with a deleted Company" do
+      before { company.destroy }
+
+      it "does not send out an email" do
+        expect(CompanyCreationMailer).not_to receive(:company_creation_information)
+        subject
+      end 
     end
   end
 end
-    # test mailer class receives company_creation_information
-      #test that company_creation_information receives deliver_later
